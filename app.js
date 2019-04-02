@@ -9,7 +9,7 @@ const lineConfig = {
 const lineClient = new line.Client(lineConfig);
 
 function createReplyMessage(input) {
-  /// 1. 固定メッセージを返す
+  // 1. 固定メッセージを返す
   return {
     type: "text",
     text: "Hack Time!"
