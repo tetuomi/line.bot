@@ -11,9 +11,10 @@ const lineClient = new line.Client(lineConfig);
 
 function createReplyMessage(input) {
   // 3. 画像を返す
-
-  text = "小坂菜緒or広瀬すず";
-
+  return {
+  type: "text",
+  text = "小坂菜緒or広瀬すず"
+  };
   const appUrl = process.env.HEROKU_APP_URL;
   const hands = ["小坂菜緒", "広瀬すず"];
   let text;
