@@ -14,8 +14,8 @@ function createReplyMessage(input) {
   const appUrl = process.env.HEROKU_APP_URL;
   return {
     type: "image",
-    previewImageUrl: `${appUrl}images/question.png`,
-    originalContentUrl: `${appUrl}images/answer.png`
+    previewImageUrl: `${appUrl}https://iq-19.com/1566.html`,
+    originalContentUrl: `${appUrl}https://iq-19.com/1566.html`
   };
 
   // メッセージオブジェクトに関する公式ドキュメント
