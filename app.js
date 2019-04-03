@@ -14,8 +14,8 @@ function createReplyMessage(input) {
   const appUrl = process.env.HEROKU_APP_URL;
   return {
     type: "image",
-    previewImageUrl: `${appUrl}https://iq-19.com/1566.html`,
-    originalContentUrl: `${appUrl}https://iq-19.com/1566.html`
+    previewImageUrl: `${appUrl}https://www.google.com/search?q=%E5%B0%8F%E5%9D%82%E8%8F%9C%E7%B7%92&source=lnms&tbm=isch&sa=X&ved=0ahUKEwja4OXLirPhAhVaFogKHXhiDBIQ_AUIDigB&biw=852&bih=827&dpr=1.13#imgrc=zz-B7rMlnFZgoM:`,
+    originalContentUrl: `${appUrl}https://www.google.com/search?q=%E5%B0%8F%E5%9D%82%E8%8F%9C%E7%B7%92&source=lnms&tbm=isch&sa=X&ved=0ahUKEwja4OXLirPhAhVaFogKHXhiDBIQ_AUIDigB&biw=852&bih=827&dpr=1.13#imgrc=zz-B7rMlnFZgoM:`
   };
 
   // メッセージオブジェクトに関する公式ドキュメント
