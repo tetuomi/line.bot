@@ -14,8 +14,8 @@ function createReplyMessage(input) {
   const appUrl = process.env.HEROKU_APP_URL;
   return {
     type: "image",
-    previewImageUrl: `${appUrl}https://storage.mantan-web.jp/images/2018/02/27/20180227dog00m200052000c/001_size6.jpg`,
-    originalContentUrl: `${appUrl}https://storage.mantan-web.jp/images/2018/02/27/20180227dog00m200052000c/001_size6.jpg`
+    previewImageUrl: `${appUrl}images/question.png`,
+    originalContentUrl: `${appUrl}images/answer.png`
   };
 
   // メッセージオブジェクトに関する公式ドキュメント
