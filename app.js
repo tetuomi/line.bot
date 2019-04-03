@@ -8,6 +8,8 @@ const lineConfig = {
 };
 const lineClient = new line.Client(lineConfig);
 
+text = "小坂菜緒or広瀬すず";
+
 function createReplyMessage(input) {
   // 3. 画像を返す
 
