@@ -12,12 +12,29 @@ function createReplyMessage(input) {
   // 3. 画像を返す
 
   const appUrl = process.env.HEROKU_APP_URL;
-  return {
+  const hands = ["小坂菜緒", "広瀬すず"];
+  let text;
+  if(hands.indexOf(input) == -1){
+    return{
+    type: "image",
+    previewImageUrl: `${appUrl}/images/akitake.jpg`,
+    originalContentUrl: `${appUrl}/images/akitake.jpg`
+    };
+  }
+  else if(hands.indexOf(input) == 0){
+    return {
     type: "image",
     previewImageUrl: `${appUrl}/images/kosakana.jpeg`,
-    originalContentUrl: `${appUrl}/images/answer.png`
-  };
-
+    originalContentUrl: `${appUrl}/images/kosakana.jpeg`
+    };
+  }
+  else if(hands.indexOf(input) == 1){
+    return {
+    type: "image",
+    previewImageUrl: `${appUrl}/images/hirosuzu.jpg`,
+    originalContentUrl: `${appUrl}/images/hirosuzu.jpg`
+    };
+  }
   // メッセージオブジェクトに関する公式ドキュメント
   // https://developers.line.me/ja/reference/messaging-api/#message-objects
 }
