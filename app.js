@@ -8,13 +8,15 @@ const lineConfig = {
 };
 const lineClient = new line.Client(lineConfig);
 
+/*function firstMessage(input){
+  return {
+    type: "text",
+    text: "小坂菜緒か広瀬すず♡"
+  };
+}*/
 
 function createReplyMessage(input) {
   // 3. 画像を返す
-  return {
-  type: "text",
-  text = "小坂菜緒or広瀬すず"
-  };
   const appUrl = process.env.HEROKU_APP_URL;
   const hands = ["小坂菜緒", "広瀬すず"];
   let text;
@@ -43,9 +45,9 @@ function createReplyMessage(input) {
   // https://developers.line.me/ja/reference/messaging-api/#message-objects
 }
 
-const server = express();
+const server = express();//以下サーバー起動
 
-server.use("/images", express.static(path.join(__dirname, "images")));
+server.use("/images", express.static(path.join(__dirname, "images")));//画像返す
 
 server.post("/webhook", line.middleware(lineConfig), (req, res) => {
   // LINEのサーバーに200を返す
@@ -53,8 +55,11 @@ server.post("/webhook", line.middleware(lineConfig), (req, res) => {
 
   for (const event of req.body.events) {
     if (event.type === "message" && event.message.type === "text") {
+      /*const message0 = firstMessage(event.message0.text);
+      lineClient.replyMessage(event.replyToken, message0);*/
+
       const message = createReplyMessage(event.message.text);
-      lineClient.replyMessage(event.replyToken, message);
+      lineClient.replyMessage(event.replyToken, message);//メッセージを届ける
     }
   }
 });
