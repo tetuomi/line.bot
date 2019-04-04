@@ -9,40 +9,25 @@ const lineConfig = {
 const lineClient = new line.Client(lineConfig);
 
 function createReplyMessage(input) {
-  // 3. 画像を返す
-  const appUrl = process.env.HEROKU_APP_URL;
-  const hands = ["小坂菜緒", "広瀬すず"];
-
-  if(hands.indexOf(input) == -1){
-    const message = {
-    previewImageUrl: `${appUrl}/images/akitake.jpg`,
-    originalContentUrl: `${appUrl}/images/akitake.jpg`
-    };
-  }
-  else if(hands.indexOf(input) == 0){
-    message = {
-    previewImageUrl: `${appUrl}/images/kosakana.jpeg`,
-    originalContentUrl: `${appUrl}/images/kosakana.jpeg`
-    };
-  }
-  else if(hands.indexOf(input) == 1){
-    message = {
-    previewImageUrl: `${appUrl}/images/hirosuzu.jpg`,
-    originalContentUrl: `${appUrl}/images/hirosuzu.jpg`
-    };
-  }
-  return{
-    type: "image",
-    message
+  // 2. オウム返しする
+  const order = 1;
+  if(order === 1){
+    let reply = [];
+    reply = {
+      type: "text", 
+      `" ${input} "だね！覚えたよ！`,
+      type: "text"
+      `いつ教えてほしい？
+      例：　「」`
   };
-  // メッセージオブジェクトに関する公式ドキュメント
-  // https://developers.line.me/ja/reference/messaging-api/#message-objects
 }
+return {
+  reply
+};
 
+const server = express();
 
-const server = express();//以下サーバー起動
-
-server.use("/images", express.static(path.join(__dirname, "images")));//画像返す
+server.use("/images", express.static(path.join(__dirname, "images")));
 
 server.post("/webhook", line.middleware(lineConfig), (req, res) => {
   // LINEのサーバーに200を返す
