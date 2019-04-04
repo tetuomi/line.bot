@@ -8,12 +8,12 @@ const lineConfig = {
 };
 const lineClient = new line.Client(lineConfig);
 
-/*function firstMessage(input){
+function firstMessage(input){
   return {
     type: "text",
     text: "小坂菜緒か広瀬すず♡"
   };
-}*/
+}
 
 function createReplyMessage(input) {
   // 3. 画像を返す
@@ -55,8 +55,8 @@ server.post("/webhook", line.middleware(lineConfig), (req, res) => {
 
   for (const event of req.body.events) {
     if (event.type === "message" && event.message.type === "text") {
-      /*const message0 = firstMessage(event.message0.text);
-      lineClient.replyMessage(event.replyToken, message0);*/
+      const message0 = firstMessage(event.message0.text);
+      lineClient.replyMessage(event.replyToken, message0);
 
       const message = createReplyMessage(event.message.text);
       lineClient.replyMessage(event.replyToken, message);//メッセージを届ける
