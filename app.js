@@ -37,6 +37,8 @@ function createReplyMessage(input) {
     text = judge_text;
     messages.push(new Message(text));
   }
+
+  console.log(messages);
   
   return messages;
 }
