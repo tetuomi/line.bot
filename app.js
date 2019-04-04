@@ -12,13 +12,12 @@ function createReplyMessage(input) {
   // 3. 画像を返す
   const appUrl = process.env.HEROKU_APP_URL;
   const hands = ["小坂菜緒", "広瀬すず"];
-  const message = [];
 
   if(hands.indexOf(input) == -1){
-    message = [
+    const message = {
     previewImageUrl: `${appUrl}/images/akitake.jpg`,
     originalContentUrl: `${appUrl}/images/akitake.jpg`
-    ];
+    };
   }
   else if(hands.indexOf(input) == 0){
     message = {
