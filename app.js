@@ -17,6 +17,7 @@ function createReplyMessage(input) {
     this.type = "text";
     this.text = text;
   }
+  console.log("flag1");
   if (hands.indexOf(input) === -1) {
     text = "グー・チョキ・パーのどれかを入力してね";
     messages.push(new Message(text));
