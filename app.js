@@ -15,26 +15,26 @@ function createReplyMessage(input) {
   const message = [];
   if(hands.indexOf(input) == -1){
     message = {
-    type: "image",
     previewImageUrl: `${appUrl}/images/akitake.jpg`,
     originalContentUrl: `${appUrl}/images/akitake.jpg`
     };
   }
   else if(hands.indexOf(input) == 0){
     message = {
-    type: "image",
     previewImageUrl: `${appUrl}/images/kosakana.jpeg`,
     originalContentUrl: `${appUrl}/images/kosakana.jpeg`
     };
   }
   else if(hands.indexOf(input) == 1){
     message = {
-    type: "image",
     previewImageUrl: `${appUrl}/images/hirosuzu.jpg`,
     originalContentUrl: `${appUrl}/images/hirosuzu.jpg`
     };
   }
-  return message;
+  return{
+    type: "image",
+    message
+  };
   // メッセージオブジェクトに関する公式ドキュメント
   // https://developers.line.me/ja/reference/messaging-api/#message-objects
 }
