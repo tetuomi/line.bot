@@ -32,12 +32,15 @@ function createReplyMessage(input) {
     };
   }
   return{
+    type: "text",
+    text: "あは",
     type: "image",
     message
   };
   // メッセージオブジェクトに関する公式ドキュメント
   // https://developers.line.me/ja/reference/messaging-api/#message-objects
 }
+
 
 const server = express();//以下サーバー起動
 
