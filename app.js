@@ -13,27 +13,25 @@ function createReplyMessage(input) {
   const appUrl = process.env.HEROKU_APP_URL;
   const hands = ["小坂菜緒", "広瀬すず"];
   const message = [];
-  const picture = [];
 
   if(hands.indexOf(input) == -1){
-    picture = {
+    message = [
     previewImageUrl: `${appUrl}/images/akitake.jpg`,
     originalContentUrl: `${appUrl}/images/akitake.jpg`
-    };
+    ];
   }
   else if(hands.indexOf(input) == 0){
-    picture = {
+    message = {
     previewImageUrl: `${appUrl}/images/kosakana.jpeg`,
     originalContentUrl: `${appUrl}/images/kosakana.jpeg`
     };
   }
   else if(hands.indexOf(input) == 1){
-    picture = {
+    message = {
     previewImageUrl: `${appUrl}/images/hirosuzu.jpg`,
     originalContentUrl: `${appUrl}/images/hirosuzu.jpg`
     };
   }
-  message.push(picture);
   return{
     type: "image",
     message
