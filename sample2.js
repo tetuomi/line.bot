@@ -31,7 +31,7 @@ server.post("/webhook", line.middleware(lineConfig), (req, res) => {
   for (const event of req.body.events) {
     if (event.type === "message" && event.message.type === "text") {
       const message = createReplyMessage(event.message.text);
-      lineClient.replyMessage(event.replyToken, message);
+      lineClient.replyMessage(event.replyToken, message);//メッセージを届ける
     }
   }
 });
