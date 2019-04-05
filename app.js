@@ -20,12 +20,11 @@ function createReplyMessage(input) {
 
 text = `${input}?`;
 messages.push(new Message(text));
-messages.push(new ('wwwwwwwwww'));
+messages.push(new Message("wwwwwwwwww"));
 
-return {
-messages
-};
+return messages;
 }
+
 
 const server = express();
 
