@@ -21,6 +21,10 @@ function createReplyMessage(input) {
 let = `${input}?`;
 messages.push(Message(text));
 messages.push(Message('wwwwwwwwww'));
+
+return {
+messages
+};
 }
 
 const server = express();
