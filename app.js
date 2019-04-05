@@ -21,6 +21,7 @@ function createReplyMessage(input) {
 text = `${input}?`;
 messages.push(new Message(text));
 messages.push(new Message("wwwwwwwwww"));
+console.log(messages);
 
 return messages;
 }
