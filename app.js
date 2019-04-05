@@ -19,8 +19,8 @@ function createReplyMessage(input) {
   }
 
 text = `${input}?`;
-messages.push(Message(text));
-messages.push(Message('wwwwwwwwww'));
+messages.push(new Message(text));
+messages.push(new ('wwwwwwwwww'));
 
 return {
 messages
