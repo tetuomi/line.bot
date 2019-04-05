@@ -18,7 +18,7 @@ function createReplyMessage(input) {
     this.text = text;
   }
 
-let = `${input}?`;
+text = `${input}?`;
 messages.push(Message(text));
 messages.push(Message('wwwwwwwwww'));
 
