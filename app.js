@@ -9,7 +9,9 @@ const lineConfig = {
 const lineClient = new line.Client(lineConfig);
 
 function createReplyMessage(input) {
-  if(input === "test"){
+
+  let text = ${input};
+  if(text === "test"){
     return {
     type:text,
     text:`success`
