@@ -9,21 +9,18 @@ const lineConfig = {
 const lineClient = new line.Client(lineConfig);
 
 function createReplyMessage(input) {
-  const messages = [];
-  let text = "";
- // let order = 0;
-
-  function Message(text){
-    this.type = "text";
-    this.text = text;
+  if(input === "test"){
+    return {
+    type:text,
+    text:`success`
+    };  
   }
-
-text = `${input}?`;
-messages.push(new Message(text));
-messages.push(new Message("wwwwwwwwww"));
-console.log(messages);
-
-return messages;
+  else{
+    return {
+      type:text,
+      text:`error`
+    };
+  }
 }
 
 
