@@ -10,7 +10,7 @@ const lineClient = new line.Client(lineConfig);
 const order = 0;
 function createReplyMessage(input) {
 if(order === 0){
-  if(input === "次へ"){
+  if(input == "次へ"){
     order++;
     return {
       type:"text",
