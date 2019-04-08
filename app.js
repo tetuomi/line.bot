@@ -7,20 +7,29 @@ const lineConfig = {
   channelSecret: process.env.LINE_CHANNEL_SECRET
 };
 const lineClient = new line.Client(lineConfig);
-
+const order = 0;
 function createReplyMessage(input) {
- const hands = ["グー","チョキ","パー"];
- let text;
- if(hands.indexOf(input) === -1){
-  text = "グー・チョキ・パーのどれかを入力してね";
- }
- else{
-   text = `${input}`;
- }
- return {
-type:"text",
-text
- };
+if(order === 0){
+  if(input === "次へ"){
+    order++;
+    return {
+      type:"text",
+      text:"success"
+    };
+  }
+}
+else if(order === 1){
+  return {
+    type:"text",
+    text: "nice"
+  };
+}
+else {
+  return{
+    type:"text",
+    text:"error"
+  };
+}
 }
 
 const server = express();
