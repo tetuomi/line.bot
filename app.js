@@ -9,22 +9,19 @@ const lineConfig = {
 const lineClient = new line.Client(lineConfig);
 
 function createReplyMessage(input) {
-
-  let text = ${input};
-  if(text === "test"){
-    return {
-    type:text,
-    text:`success`
-    };  
-  }
-  else{
-    return {
-      type:text,
-      text:`error`
-    };
-  }
+ const hands = ["グー","チョキ","パー"];
+ let text;
+ if(hands.indexOf(input) === -1){
+  text = "グー・チョキ・パーのどれかを入力してね";
+ }
+ else{
+   text = `${input}`;
+ }
+ return {
+type:"text",
+text
+ };
 }
-
 
 const server = express();
 
