@@ -7,7 +7,7 @@ const pool = new pg.Pool(config.db.postgres);
 
 const lineConfig = {
   channelAccessToken: process.env.LINE_CHANNEL_ACCESS_TOKEN,
-  channelSecret:      process.env.LINE_CHANNEL_SECRET_KEY
+  channelSecret:      process.env.LINE_CHANNEL_SECRET
 };
 
 const lineClient = new line.Client(lineConfig);
