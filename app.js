@@ -13,7 +13,7 @@ const lineConfig = {
 const lineClient = new line.Client(lineConfig);
 const server     = express();
 
-server.post("/", line.middleware(lineConfig), (req, res) => {
+server.post("/webhook", line.middleware(lineConfig), (req, res) => {
   res.sendStatus(200);
   for (const event of req.body.events) {
     if (event.source.type == "user" && event.type == "message" && event.message.type == "text") {
