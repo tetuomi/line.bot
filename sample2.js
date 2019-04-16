@@ -37,3 +37,22 @@ server.post("/webhook", line.middleware(lineConfig), (req, res) => {
 });
 
 server.listen(process.env.PORT || 8080);
+
+
+/*function createReplyMessage(input) {
+  const messages = [];
+  let text = "";
+ // let order = 0;
+
+  function Message(text){
+    this.type = "text";
+    this.text = text;
+  }
+
+text = `${input}?`;
+messages.push(new Message(text));
+messages.push(new Message("wwwwwwwwww"));
+console.log(messages);
+
+return messages;
+}*/
