@@ -45,9 +45,8 @@ server.post("/webhook", line.middleware(lineConfig), (req, res) => {
           });
         });
       }
-    }
+    }+
   }
-  
 });
 //22,37,16
 
