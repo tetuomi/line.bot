@@ -19,7 +19,7 @@ server.post("/webhook", line.middleware(lineConfig), (req, res) => {
     if (event.source.type == "user" && event.type == "message" && event.message.type == "text") {
       if (event.message.text == "履歴") {
         pool.connect((err, client, done) => {
-          const query = "SELECT * FROM messages WHERE user_id = '"+event.source.userId+"';";
+          const query = "SELECT * FROM talk WHERE user_id = '"+event.source.userId+"';";
           console.log("query: " + query);
           client.query(query, (err, result) => {
             console.log(result);
@@ -34,7 +34,7 @@ server.post("/webhook", line.middleware(lineConfig), (req, res) => {
       }
       else {
         pool.connect((err, client, done) => {
-          const query = "INSERT INTO messages (user_id, message) VALUES ("
+          const query = "INSERT INTO talk (user_id, message) VALUES ("
             +"'"+event.source.userId+"', '"+event.message.text+"');";
           console.log("query: " + query);
           client.query(query, (err, result) => {
@@ -48,6 +48,5 @@ server.post("/webhook", line.middleware(lineConfig), (req, res) => {
     }
   }
 });
-//22,37,16
 
 server.listen(process.env.PORT || 8000);
