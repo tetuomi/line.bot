@@ -27,7 +27,7 @@ server.post("/webhook", line.middleware(lineConfig), (req, res) => {
   res.sendStatus(200);
   for (const event of req.body.events) {
     if (event.source.type == "user" && event.type == "message" && event.message.type == "text") {
-      if(input == "単語"){
+      if(event.message.text == "単語"){
         messages.push(Textmessages(questions[0]));
         //numに０を保存
         pool.connect((err, client, done) => {
