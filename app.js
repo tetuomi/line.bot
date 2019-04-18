@@ -29,6 +29,7 @@ if(input == "単語"){
   pool.connect((err, client, done) => {
     const query = "INSERT INTO words (user_id, num) VALUES ("
       +"'"+event.source.userId+"', '"+ 0 +"');";
+    console.log("query: " + query);
     client.query(query, (err, result) => {
       done();
       if (!err) {
@@ -38,6 +39,7 @@ if(input == "単語"){
   });
 }
 else{
+  let x;
   //numの取り出し
   pool.connect((err, client, done) => {
     const query = "SELECT * FROM words WHERE user_id = '"+event.source.userId+"';";
@@ -47,16 +49,14 @@ else{
       messages.push(Textmessages(answers[result.rows.num]));
       messages.push((event.message.text == answers[result.rows.num])? TextMessages(questions[result.rows.num + 1]) : Textmessages(questions[result.rows.num]));
       lineClient.replyMessage(event.replyToken, messages);
+      x =(event.message.text == answers[result.rows.num])? result.rows.num + 1 : result.rows.num;
     });
   });
   //numの保存
-    let x =(event.message.text == answers[result.rows.num])? result.rows.num + 1 : result.rows.num;
     pool.connect((err, client, done) => {
     const query = "INSERT INTO words (user_id, num) VALUES ("
       +"'"+event.source.userId+"', '"+ x +"');";
-    client.query(query, (err, result) => {
-      done();
-    });
+    client.query(query);//大幅に変えた
   });
 }
 
