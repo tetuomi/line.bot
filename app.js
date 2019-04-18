@@ -12,6 +12,7 @@ const lineConfig = {
 
 const lineClient = new line.Client(lineConfig);
 const server     = express();
+
 const questions = ["dog","cat","bird"];
 const answers = ["犬","猫","鳥"];
 var messages = [];
@@ -56,12 +57,12 @@ server.post("/webhook", line.middleware(lineConfig), (req, res) => {
           });
         });
         //numの保存
-          pool.connect((err, client, done) => {
+          pool.connect((err, client) => {
           const query = "INSERT INTO words (user_id, num) VALUES ("
             +"'"+event.source.userId+"', '"+ x +"');";
           client.query(query);//大幅に変えた
-        });
-}
+          });
+      }
     }
   }
 });
