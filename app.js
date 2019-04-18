@@ -57,10 +57,11 @@ server.post("/", line.middleware(lineConfig), (req, res) => {
           });
         });
         //numの保存
-          pool.connect((err, client) => {
+          pool.connect((err, client,done) => {
           const query = "INSERT INTO words (user_id, num) VALUES ("
             +"'"+event.source.userId+"', '"+ x +"');";
           client.query(query);//大幅に変えた
+          done();
           });
       }
     }
