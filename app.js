@@ -37,6 +37,7 @@ server.post("/webhook", line.middleware(lineConfig), (req, res) => {
           console.log("query: " + query);
           client.query(query, (err, result) => {
             done();
+            console.log("good");
             if (!err) {
               lineClient.replyMessage(event.replyToken, messages);
             }
