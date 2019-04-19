@@ -38,7 +38,7 @@ server.post("/webhook", line.middleware(lineConfig), (req, res) => {
           client.query(query, (err, result) => {
             done();
             if (!err) {
-              lineClient.replyMessage(event.replyToken, TextMessages(questions[0]));
+              lineClient.replyMessage(event.replyToken, messages);
             }
           });
         });
