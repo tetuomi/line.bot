@@ -68,5 +68,7 @@ server.post("/webhook", line.middleware(lineConfig), (req, res) => {
       });
     }
 }
+  }
+});
 
 server.listen(process.env.PORT || 8000);
