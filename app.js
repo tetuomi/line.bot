@@ -53,7 +53,7 @@ server.post("/webhook", line.middleware(lineConfig), (req, res) => {
             messages.push(TextMessages(event.message.text == answers[result.rows.num.integer]?"大正解！！":"ぶ～～～"));
             messages.push(TextMessages(answers[result.rows.num.integer]));
             messages.push(TextMessages(event.message.text == answers[result.rows.num.integer]?
-              questions[result.rows.num + 1] : questions[result.rows.num.integer]));
+              questions[result.rows.num.integer + 1] : questions[result.rows.num.integer]));
             lineClient.replyMessage(event.replyToken, messages);
             x =(event.message.text == answers[result.rows.numinteger])? result.rows.num.integer + 1 : result.rows.num.integer;
           });
