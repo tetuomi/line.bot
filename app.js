@@ -50,12 +50,12 @@ server.post("/webhook", line.middleware(lineConfig), (req, res) => {
           const query = "SELECT * FROM words WHERE user_id = '"+event.source.userId+"';";
           client.query(query, (err, result) => {
             done();
-            messages.push(TextMessages(event.message.text == answers[result.rows.num]?"大正解！！":"ぶ～～～"));
-            messages.push(TextMessages(answers[result.rows.num]));
-            messages.push(TextMessages(event.message.text == answers[result.rows.num]?
-              questions[result.rows.num + 1] : questions[result.rows.num]));
+            messages.push(TextMessages(event.message.text == answers[result.rows.num.integer]?"大正解！！":"ぶ～～～"));
+            messages.push(TextMessages(answers[result.rows.num.integer]));
+            messages.push(TextMessages(event.message.text == answers[result.rows.num.integer]?
+              questions[result.rows.num + 1] : questions[result.rows.num.integer]));
             lineClient.replyMessage(event.replyToken, messages);
-            x =(event.message.text == answers[result.rows.num])? result.rows.num + 1 : result.rows.num;
+            x =(event.message.text == answers[result.rows.numinteger])? result.rows.num.integer + 1 : result.rows.num.integer;
           });
         });
         //numの保存
