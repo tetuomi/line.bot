@@ -14,9 +14,6 @@ const lineConfig = {
 const lineClient = new line.Client(lineConfig);
 const server     = express();
 
-
-server.post("/webhook", line.middleware(lineConfig), (req, res) => {
-  res.sendStatus(200);
 const questions = ["dog","cat","bird"];
 const answers = ["犬","猫","鳥"];
 
@@ -26,6 +23,9 @@ function TextMessages(text){
     text: text
   };
 }
+
+server.post("/webhook", line.middleware(lineConfig), (req, res) => {
+  res.sendStatus(200);
   for (const event of req.body.events) {
     if (event.source.type == "user" && event.type == "message" && event.message.type == "text") {
       if(event.message.text == "単語"){
