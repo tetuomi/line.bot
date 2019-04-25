@@ -48,6 +48,7 @@ server.post("/webhook", line.middleware(lineConfig), (req, res) => {
         pool2.connect((err, client, done) => {
           const query = "SELECT * FROM words WHERE user_id = '"+event.source.userId+"';";
           client.query(query, (err, result) => {
+            let messages = [];
             done();
             messages.push(TextMessages(event.message.text == answers[result.rows.num.integer]?"大正解！！":"ぶ～～～"));
             messages.push(TextMessages(answers[result.rows.num.integer]));
