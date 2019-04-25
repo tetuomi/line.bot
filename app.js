@@ -45,7 +45,7 @@ server.post("/webhook", line.middleware(lineConfig), (req, res) => {
         });
       }
       else{
-        let x;
+        var x;
         pool2.connect((err, client, done) => {   //numの取り出し
           const query = "SELECT * FROM words WHERE user_id = '"+event.source.userId+"';";
           client.query(query, (err, result) => {
