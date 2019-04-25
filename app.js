@@ -45,18 +45,23 @@ server.post("/webhook", line.middleware(lineConfig), (req, res) => {
         });
       }
       else{
+        var x;
         pool2.connect((err, client, done) => {   //numの取り出し
           const query = "SELECT * FROM words WHERE user_id = '"+event.source.userId+"';";
           client.query(query, (err, result) => {
             let messages = [];
+            let buff = [];
+            for(const row of result.rows){
+              buff.push(row.num);
+            }
             done();
-            messages.push(TextMessages(event.message.text == answers[result.rows.num]?"大正解！！":"ぶ～～～"));
-            messages.push(TextMessages(answers[result.rows.num]));
-            messages.push(TextMessages(event.message.text == answers[result.rows.num]?
-              questions[result.rows.num + 1] : questions[result.rows.num]));
+            messages.push(TextMessages(event.message.text == answers[buff.slice(-1)]?"大正解！！":"ぶ～～～"));
+            messages.push(TextMessages(answers[buff.slice(-1)]));
+            messages.push(TextMessages(event.message.text == answers[buff.slice(-1)]?
+              questions[buff.slice(-1) + 1] : questions[buff.slice(-1)]));
             lineClient.replyMessage(event.replyToken, messages);
-            console.lofg(messages);
-            const x =(event.message.text == answers[result.rows.num])? result.rows.num + 1 : result.rows.num;
+            console.log(messages);
+            x =(event.message.text == answers[buff.slice(-1)])? buff.slice(-1) + 1 : buff.slice(-1);
           });
         });
         //numの保存
