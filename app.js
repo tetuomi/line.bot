@@ -45,7 +45,6 @@ server.post("/webhook", line.middleware(lineConfig), (req, res) => {
         });
       }
       else{
-        var x;
         pool2.connect((err, client, done) => {   //numの取り出し
           const query = "SELECT * FROM words WHERE user_id = '"+event.source.userId+"';";
           client.query(query, (err, result) => {
@@ -56,7 +55,7 @@ server.post("/webhook", line.middleware(lineConfig), (req, res) => {
             messages.push(TextMessages(event.message.text == answers[result.rows.num]?
               questions[result.rows.num + 1] : questions[result.rows.num]));
             lineClient.replyMessage(event.replyToken, messages);
-            x =(event.message.text == answers[result.rows.num])? result.rows.num + 1 : result.rows.num;
+            const x =(event.message.text == answers[result.rows.num])? result.rows.num + 1 : result.rows.num;
           });
         });
         //numの保存
