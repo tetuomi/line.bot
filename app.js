@@ -35,13 +35,12 @@ server.post("/webhook", line.middleware(lineConfig), (req, res) => {
           console.log("query: " + query);
           client.query(query, (err, result) => {
             done();
-            let messages = [];
-            if (!err) {
-              messages.push(TextMessages(questions[0]));
-              lineClient.replyMessage(event.replyToken, messages);
             }
-          });
+          );
         });
+        let messages = [];
+        messages.push(TextMessages(questions[0]));
+        lineClient.replyMessage(event.replyToken, messages);
       }
       else{
         let x;
