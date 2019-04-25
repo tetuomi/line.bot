@@ -19,7 +19,7 @@ const answers = ["犬","猫","鳥"];
 
 const TextMessages = (text) => {
   return {
-    text: "text",
+    type: "text",
     text: text
   };
 }
