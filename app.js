@@ -17,7 +17,7 @@ const server     = express();
 const questions = ["dog","cat","bird"];
 const answers = ["犬","猫","鳥"];
 
-function TextMessages(text){
+const TextMessages = (text) => {
   return {
     text: "text",
     text: text
@@ -36,16 +36,17 @@ server.post("/webhook", line.middleware(lineConfig), (req, res) => {
           console.log("query: " + query);
           client.query(query, (err, result) => {
             done();
+            let messages = [];
+            messages.push(questions[0]);
             if(!err){
-              lineClient.replyMessage(event.replyToken,{type: "text", text: questions[0]});
+              lineClient.replyMessage(event.replyToken,messages);
             }
           });
         });
       }
       else{
         let x;
-        //numの取り出し
-        pool2.connect((err, client, done) => {
+        pool2.connect((err, client, done) => {   //numの取り出し
           const query = "SELECT * FROM words WHERE user_id = '"+event.source.userId+"';";
           client.query(query, (err, result) => {
             let messages = [];
@@ -62,6 +63,7 @@ server.post("/webhook", line.middleware(lineConfig), (req, res) => {
           pool1.connect((err, client,done) => {
           const query = "INSERT INTO words (user_id, num) VALUES ("
             +"'"+event.source.userId+"', '"+ x +"');";
+          console.log("query: " + query);
           client.query(query,(err, result) => {
           done();
           });
