@@ -32,7 +32,7 @@ server.post("/webhook", line.middleware(lineConfig), (req, res) => {
         //numに０を保存
         pool1.connect((err, client, done) => {
           const query = "INSERT INTO words (user_id, num) VALUES ("
-            +"'"+event.source.userId+"', "+ 0 +");";
+            +"'"+event.source.userId+"', '"+ 0 +"');";
           console.log("query: " + query);
           client.query(query, (err, result) => {
             done();
@@ -58,7 +58,7 @@ server.post("/webhook", line.middleware(lineConfig), (req, res) => {
             console.log(buff.slice(-1));
             messages.push(TextMessages(event.message.text == answers[buff.slice(-1)]?"大正解！！":"ぶ～～～"));
             messages.push(TextMessages("答えは　" + answers[buff.slice(-1)]));
-            messages.push(TextMessages(questions[event.message.text == answers[buff.slice(-1)]? buff.slice(-1) + 1:buff.slice(-1)]));
+            messages.push(TextMessages(questions[event.message.text == answers[buff.slice(-1)]? parseInt(buff.slice(-1),10) + 1:buff.slice(-1)]));
             lineClient.replyMessage(event.replyToken, messages);
             console.log(messages);
             x =(event.message.text == answers[buff.slice(-1)])? buff.slice(-1) + 1 : buff.slice(-1);
@@ -67,7 +67,7 @@ server.post("/webhook", line.middleware(lineConfig), (req, res) => {
         //numの保存
           pool1.connect((err, client,done) => {
           const query = "INSERT INTO words (user_id, num) VALUES ("
-            +"'"+event.source.userId+"', "+ 1 +");";
+            +"'"+event.source.userId+"', '"+ 1 +"');";
           console.log("query: " + query);
           client.query(query,(err, result) => {
           done();
