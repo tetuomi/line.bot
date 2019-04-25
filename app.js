@@ -55,10 +55,10 @@ server.post("/webhook", line.middleware(lineConfig), (req, res) => {
               buff.push(row.num);
             }
             done();
+            console.log(buff.slice(-1));
             messages.push(TextMessages(event.message.text == answers[buff.slice(-1)]?"大正解！！":"ぶ～～～"));
-            messages.push(TextMessages(answers[buff.slice(-1)]));
-            messages.push(TextMessages(questions[event.message.text == answers[buff.slice(-1)]? 1:2]));
-              //buff.slice(-1) + 1 :buff.slice(-1)));
+            messages.push(TextMessages("答えは　" + answers[buff.slice(-1)]));
+            messages.push(TextMessages(questions[event.message.text == answers[buff.slice(-1)]? buff.slice(-1) + 1:buff.slice(-1)]));
             lineClient.replyMessage(event.replyToken, messages);
             console.log(messages);
             x =(event.message.text == answers[buff.slice(-1)])? buff.slice(-1) + 1 : buff.slice(-1);
