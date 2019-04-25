@@ -37,7 +37,7 @@ server.post("/webhook", line.middleware(lineConfig), (req, res) => {
           client.query(query, (err, result) => {
             done();
             let messages = [];
-            messages.push(questions[0]);
+            messages.push(TextMessages(questions[0]));
             if(!err){
               lineClient.replyMessage(event.replyToken,messages);
             }
