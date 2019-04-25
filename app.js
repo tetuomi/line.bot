@@ -57,8 +57,8 @@ server.post("/webhook", line.middleware(lineConfig), (req, res) => {
             done();
             messages.push(TextMessages(event.message.text == answers[buff.slice(-1)]?"大正解！！":"ぶ～～～"));
             messages.push(TextMessages(answers[buff.slice(-1)]));
-            messages.push(TextMessages(event.message.text == answers[buff.slice(-1)]?
-              questions[buff.slice(-1) + 1] : questions[buff.slice(-1)]));
+            messages.push(TextMessages(questions[event.message.text == answers[buff.slice(-1)]? 1:2]));
+              //buff.slice(-1) + 1 :buff.slice(-1)));
             lineClient.replyMessage(event.replyToken, messages);
             console.log(messages);
             x =(event.message.text == answers[buff.slice(-1)])? buff.slice(-1) + 1 : buff.slice(-1);
@@ -67,7 +67,7 @@ server.post("/webhook", line.middleware(lineConfig), (req, res) => {
         //numの保存
           pool1.connect((err, client,done) => {
           const query = "INSERT INTO words (user_id, num) VALUES ("
-            +"'"+event.source.userId+"', '"+ x +"');";
+            +"'"+event.source.userId+"', '"+ 1 +"');";
           console.log("query: " + query);
           client.query(query,(err, result) => {
           done();
