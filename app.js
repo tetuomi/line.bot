@@ -55,6 +55,7 @@ server.post("/webhook", line.middleware(lineConfig), (req, res) => {
             messages.push(TextMessages(event.message.text == answers[result.rows.num]?
               questions[result.rows.num + 1] : questions[result.rows.num]));
             lineClient.replyMessage(event.replyToken, messages);
+            console.lofg(messages);
             const x =(event.message.text == answers[result.rows.num])? result.rows.num + 1 : result.rows.num;
           });
         });
