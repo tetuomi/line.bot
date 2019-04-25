@@ -16,7 +16,6 @@ const server     = express();
 
 const questions = ["dog","cat","bird"];
 const answers = ["犬","猫","鳥"];
-var messages = [];
 
 function TextMessages(text){
   return {
@@ -36,6 +35,7 @@ server.post("/webhook", line.middleware(lineConfig), (req, res) => {
           console.log("query: " + query);
           client.query(query, (err, result) => {
             done();
+            let messages = [];
             if (!err) {
               messages.push(TextMessages(questions[0]));
               lineClient.replyMessage(event.replyToken, messages);
