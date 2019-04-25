@@ -44,7 +44,7 @@ server.post("/webhook", line.middleware(lineConfig), (req, res) => {
           });
         });
       }
-      else{
+      /*else{
         let x;
         //numの取り出し
         pool2.connect((err, client, done) => {
@@ -67,7 +67,7 @@ server.post("/webhook", line.middleware(lineConfig), (req, res) => {
           done();
           });
       });
-      }
+      }*/
     }
   }
 });
