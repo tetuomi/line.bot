@@ -61,13 +61,13 @@ server.post("/webhook", line.middleware(lineConfig), (req, res) => {
             messages.push(TextMessages(questions[event.message.text == answers[buff.slice(-1)]? buff.slice(-1) + 1:buff.slice(-1)]));
             lineClient.replyMessage(event.replyToken, messages);
             console.log(messages);
-            x =(event.message.text == answers[buff.slice(-1)])? parseInt(buff.slice(-1),10) + 1 : buff.slice(-1);
+            x =(event.message.text == answers[buff.slice(-1)])? buff.slice(-1) + 1 : buff.slice(-1);
           });
         });
         //numの保存
           pool1.connect((err, client,done) => {
           const query = "INSERT INTO words (user_id, num) VALUES ("
-            +"'"+event.source.userId+"', '"+ 1 +"');";
+            +"'"+event.source.userId+"', "+ 1 +");";
           console.log("query: " + query);
           client.query(query,(err, result) => {
           done();
