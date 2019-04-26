@@ -3,8 +3,8 @@ const line    = require("@line/bot-sdk");
 const pg      = require("pg");
 const config  = require("./config.json");
 
-const pool1 = new pg.Pool(config.db.postgres);//保存
-const pool2 = new pg.Pool(config.db.postgres);//取り出し
+const pool1 = new pg.Pool(config.db.postgres);//取り出し
+const pool2 = new pg.Pool(config.db.postgres);//保存
 
 const lineConfig = {
   channelAccessToken: process.env.LINE_CHANNEL_ACCESS_TOKEN,
@@ -30,7 +30,7 @@ server.post("/webhook", line.middleware(lineConfig), (req, res) => {
     if (event.source.type == "user" && event.type == "message" && event.message.type == "text") {
       if(event.message.text == "単語"){
         //numに０を保存
-        pool1.connect((err, client, done) => {
+        pool2.connect((err, client, done) => {
           const query = "INSERT INTO words (user_id, num) VALUES ("
             +"'"+event.source.userId+"', '"+ 0 +"');";
           console.log("query: " + query);
@@ -46,7 +46,7 @@ server.post("/webhook", line.middleware(lineConfig), (req, res) => {
       }
       else{
         var X;
-        pool2.connect((err, client, done) => {   //numの取り出し
+        pool1.connect((err, client, done) => {   //numの取り出し
           const query = "SELECT * FROM words WHERE user_id = '"+event.source.userId+"';";
           client.query(query, (err, result) => {
             let messages = [];
@@ -67,7 +67,7 @@ server.post("/webhook", line.middleware(lineConfig), (req, res) => {
           });
         });
         //numの保存
-          pool1.connect((err, client,done) => {
+          pool2.connect((err, client,done) => {
           const query = "INSERT INTO words (user_id, num) VALUES ("
             +"'"+event.source.userId+"', '"+ X +"');";
           console.log("query: " + query);
