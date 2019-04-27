@@ -24,6 +24,8 @@ const TextMessages = (text) => {
   };
 }
 
+var number;
+
 server.post("/webhook", line.middleware(lineConfig), (req, res) => {
   res.sendStatus(200);
   for (const event of req.body.events) {
@@ -45,7 +47,6 @@ server.post("/webhook", line.middleware(lineConfig), (req, res) => {
         });
       }
       else{
-        var X;
         pool1.connect((err, client, done) => {   //numの取り出し
           const query = "SELECT * FROM words WHERE user_id = '"+event.source.userId+"';";
           client.query(query, (err, result) => {
@@ -55,21 +56,20 @@ server.post("/webhook", line.middleware(lineConfig), (req, res) => {
               buff.push(row.num);
             }
             done();
-            console.log("buffの中身は" + buff.slice(-1));
+            console.log("buff :" + buff.slice(-1));
             messages.push(TextMessages(event.message.text == answers[buff.slice(-1)]?"大正解！！":"ぶ～～～"));
             messages.push(TextMessages(questions[buff.slice(-1)] + "  >>>>>  " + answers[buff.slice(-1)]));
             messages.push(TextMessages(questions[event.message.text == answers[parseInt(buff.slice(-1),10)]? (parseInt(buff.slice(-1),10) + 1):buff.slice(-1)]));
             lineClient.replyMessage(event.replyToken, messages);
             console.log(messages);
-            const x = (event.message.text == answers[parseInt(buff.slice(-1),10)])? (parseInt(buff.slice(-1),10) + 1) : buff.slice(-1);
-            console.log("xの中身は" + x);
-            X = x;
+            number = (event.message.text == answers[parseInt(buff.slice(-1),10)])? (parseInt(buff.slice(-1),10) + 1) : buff.slice(-1);
+            console.log("number :" + number);
           });
         });
         //numの保存
           pool2.connect((err, client,done) => {
           const query = "INSERT INTO words (user_id, num) VALUES ("
-            +"'"+event.source.userId+"', `"+ X +"`);";
+            +"'"+event.source.userId+"', `"+ number +"`);";
           console.log("query: " + query);
           client.query(query,(err, result) => {
           done();
