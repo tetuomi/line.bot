@@ -14,8 +14,8 @@ const lineConfig = {
 const lineClient = new line.Client(lineConfig);
 const server     = express();
 
-const questions = ["dog","cat","bird","monkey"];
-const answers = ["犬","猫","鳥","猿"];
+const questions = ["dog","cat","bird","monkey","cattle"];
+const answers = ["犬","猫","鳥","猿","牛"];
 
 const TextMessages = (text) => {
   return {
@@ -57,12 +57,12 @@ server.post("/webhook", line.middleware(lineConfig), (req, res) => {
             }
             done();
             console.log("buff :" + buff.slice(-1));
-            messages.push(TextMessages(event.message.text == answers[parseInt(buff.slice(-1))]?"大正解！！":"ぶ～～～"));
-            messages.push(TextMessages(questions[parseInt(buff.slice(-1))] + "  >>>>>  " + answers[parseInt(buff.slice(-1))]));
-            messages.push(TextMessages(questions[event.message.text == answers[parseInt(buff.slice(-1))]? (parseInt(buff.slice(-1),10) + 1):parseInt(buff.slice(-1))]));
+            messages.push(TextMessages(event.message.text == answers[buff.slice(-1)]?"大正解！！":"ぶ～～～"));
+            messages.push(TextMessages(questions[buff.slice(-1)] + "  >>>>>  " + answers[buff.slice(-1)]));
+            messages.push(TextMessages(questions[parseInt(buff.slice(-1),10) + (event.message.text == answers[buff.slice(-1)]?1:0)]));
             lineClient.replyMessage(event.replyToken, messages);
             console.log(messages);
-            number = (event.message.text == answers[buff.slice(-1)])? (parseInt(buff.slice(-1),10) + 1):  parseInt(buff.slice(-1));
+            number = parseInt(buff.slice(-1),10) + (event.message.text == answers[buff.slice(-1)]?1:0);
             console.log("number :" + number);
           });
         });
