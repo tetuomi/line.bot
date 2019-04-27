@@ -57,12 +57,12 @@ server.post("/webhook", line.middleware(lineConfig), (req, res) => {
             }
             done();
             console.log("buff :" + buff.slice(-1));
-            messages.push(TextMessages(event.message.text == answers[buff.slice(-1)]?"大正解！！":"ぶ～～～"));
-            messages.push(TextMessages(questions[buff.slice(-1)] + "  >>>>>  " + answers[buff.slice(-1)]));
-            messages.push(TextMessages(questions[event.message.text == answers[buff.slice(-1)]? (parseInt(buff.slice(-1),10) + 1):buff.slice(-1)]));
+            messages.push(TextMessages(event.message.text == answers[parseInt(buff.slice(-1))]?"大正解！！":"ぶ～～～"));
+            messages.push(TextMessages(questions[parseInt(buff.slice(-1))] + "  >>>>>  " + answers[parseInt(buff.slice(-1))]));
+            messages.push(TextMessages(questions[event.message.text == answers[parseInt(buff.slice(-1))]? (parseInt(buff.slice(-1),10) + 1):parseInt(buff.slice(-1))]));
             lineClient.replyMessage(event.replyToken, messages);
             console.log(messages);
-            number = (event.message.text == answers[buff.slice(-1)])? buff.slice(-1) + 1 : buff.slice(-1);
+            number = (event.message.text == answers[buff.slice(-1)])? (parseInt(buff.slice(-1),10) + 1):  parseInt(buff.slice(-1));
             console.log("number :" + number);
           });
         });
