@@ -66,16 +66,17 @@ server.post("/webhook", line.middleware(lineConfig), (req, res) => {
             console.log("number :" + number);
           });
         });
-        //numの保存
-          pool2.connect((err, client,done) => {
+      }
+      if(!event.message.text == "単語"){//numの保存
+        pool2.connect((err, client,done) => {
           const query = "INSERT INTO words (user_id, num) VALUES ("
-            +"'"+event.source.userId+"', "+ number +");";
+              +"'"+event.source.userId+"', "+ number +");"
           console.log("query: " + query);
           client.query(query,(err, result) => {
           done();
           });
         });
-      } 
+      }
     }
   }
 });
