@@ -62,7 +62,7 @@ server.post("/webhook", line.middleware(lineConfig), (req, res) => {
             messages.push(TextMessages(questions[event.message.text == answers[buff.slice(-1)]? (parseInt(buff.slice(-1),10) + 1):buff.slice(-1)]));
             lineClient.replyMessage(event.replyToken, messages);
             console.log(messages);
-            number = (event.message.text == answers[buff.slice(-1)])? (parseInt(buff.slice(-1),10) + 1) : buff.slice(-1);
+            number = (event.message.text == answers[buff.slice(-1)])? buff.slice(-1) + 1 : buff.slice(-1);
             console.log("number :" + number);
           });
         });
