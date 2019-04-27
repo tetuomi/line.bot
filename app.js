@@ -40,9 +40,9 @@ server.post("/webhook", line.middleware(lineConfig), (req, res) => {
             done();
             let messages = [];
             messages.push(TextMessages(questions[0]));
-            if(!err){
+          //  if(!err){
               lineClient.replyMessage(event.replyToken,messages);
-            }
+            //}
           });
         });
       }
